@@ -1,19 +1,24 @@
 #!/bin/bash
 
-# Update package lists
-sudo apt update -y
+# Update the system packages
+echo "Updating system packages..."
+sudo yum update -y
 
-# Install Apache web server
-sudo apt install apache2 -y
+# Install Apache (httpd in CentOS/RHEL)
+echo "Installing Apache web server..."
+sudo yum install httpd -y
 
-# Enable Apache service to start on boot
-sudo systemctl enable apache2
+# Enable Apache to start on boot
+echo "Enabling Apache to start on boot..."
+sudo systemctl enable httpd
 
-# Start Apache service
-sudo systemctl start apache2
+# Start Apache
+echo "Starting Apache web server..."
+sudo systemctl start httpd
 
-# Print the status of Apache service
-sudo systemctl status apache2
+# Check if Apache is running
+echo "Checking Apache status..."
+sudo systemctl status httpd
 
-# Print message on successful installation
-echo "Apache web server installed and running!"
+# Print completion message
+echo "Apache installation and setup completed!"
