@@ -1,6 +1,5 @@
 #!/bin/bash
 
-mkdir vivesind
 # Update the system packages
 echo "Updating system packages..."
 sudo yum update -y
