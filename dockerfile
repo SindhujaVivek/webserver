@@ -1,22 +1,25 @@
-# Use an official Python runtime as a parent image
-FROM python:3.11-slim
+# Use an old, unpatched base image
+FROM python:3.7
 
-# Set environment variables
+# Disable Python bytecode and buffering
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
-# Set the working directory
+# Work in /app
 WORKDIR /app
 
-# Install dependencies
+# Install dependencies without pinning versions (can lead to dependency confusion or outdated packages)
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install -r requirements.txt
 
-# Copy the application code
+# Copy the app code
 COPY . .
 
-# Expose the port your app runs on
+# Run the app as root (security risk)
+USER root
+
+# Expose a known vulnerable port
 EXPOSE 5000
 
-# Command to run your app
+# Run with debug mode ON — remote code execution risk
 CMD ["python", "app.py"]
